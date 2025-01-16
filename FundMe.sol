@@ -31,11 +31,23 @@ contract FundMe {
             require(msg.value.getConversionRate() >= minimumUsd, "didn't send enough ETH");
         // using getConversionRate function to convert this price to dollars
         funders.push(msg.sender);
-        addressToAmountFunded[msg.sender] = addressToAmountFunded[msg.sender] + msg.value;
+        addressToAmountFunded[msg.sender] += msg.value;
+        // += means add msg.value to addressToAmountFunded[msg.sender]
     }
 
-    // function withdraw() public {}
+    function withdraw() public {
+        // for loop
+        // [1, 2, 3, 4] elements
+        //  0, 1, 3, 4 indices
+        //for(/* starting index, ending index, step amount */)
+        // 0, 10, 1
+        // 0 , 1, 2, 3, 4
+        for(uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++) {
+            // ++ means the variable plus one
+            address funder = funders[funderIndex];
+            addressToAmountFunded[funder] = 0;
+        }
+        
 
-
-
-}
+        }
+    }
